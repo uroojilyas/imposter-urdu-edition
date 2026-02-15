@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اردو امپوسٹر گیم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Game Title -->
+        <header>
+            <h1>🎭 اردو امپوسٹر گیم</h1>
+            <p class="subtitle">کون جھوٹا ہے؟</p>
+        </header>
+
+        <!-- Setup Screen -->
+        <div id="setupScreen" class="screen active">
+            <!-- Player Management -->
+            <section class="card">
+                <h2>کھلاڑی شامل کریں</h2>
+                <div class="input-group">
+                    <input type="text" id="playerNameInput" placeholder="کھلاڑی کا نام درج کریں">
+                    <button onclick="addPlayer()" class="btn btn-primary">کھلاڑی شامل کریں</button>
+                </div>
+                
+                <div id="playersList" class="players-list"></div>
+                <p class="info-text">کم از کم 3 کھلاڑی درکار ہیں</p>
+            </section>
+
+            <!-- Game Settings -->
+            <section class="card">
+                <h2>گیم کی ترتیبات</h2>
+                
+                <div class="setting-group">
+                    <label>زمرے منتخب کریں (ایک یا زیادہ):</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="category" value="fruits" checked>
+                            <span>پھل</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="category" value="animals">
+                            <span>جانور</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="category" value="professions">
+                            <span>پیشے</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="category" value="cities">
+                            <span>شہر</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="category" value="vehicles">
+                            <span>گاڑیاں</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="category" value="sports">
+                            <span>کھیل</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label for="impostersCount">امپوسٹرز کی تعداد:</label>
+                    <select id="impostersCount" class="select-input">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                <button onclick="startGame()" class="btn btn-success btn-large">کھیل شروع کریں 🎮</button>
+            </section>
+        </div>
+
+        <!-- Role Reveal Screen -->
+        <div id="revealScreen" class="screen">
+            <section class="card reveal-card">
+                <h2 id="currentPlayerName" class="player-name-title"></h2>
+                <p class="instruction">اپنا کردار دیکھنے کے لیے بٹن دبائیں</p>
+                
+                <button id="revealBtn" onclick="revealRole()" class="btn btn-warning btn-large">
+                    میرا کردار دکھائیں 
+                </button>
+
+                <div id="roleDisplay" class="role-display hidden">
+                    <div id="roleContent"></div>
+                </div>
+
+                <button id="nextPlayerBtn" onclick="nextPlayer()" class="btn btn-primary btn-large hidden">
+                    اگلا کھلاڑی ➡️
+                </button>
+
+                <button id="finishRevealBtn" onclick="finishReveal()" class="btn btn-success btn-large hidden">
+                    تمام کھلاڑیوں نے دیکھ لیا ✓
+                </button>
+            </section>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <section class="card">
+                <h2>گیم جاری ہے...</h2>
+                <p class="game-instruction">اب تمام کھلاڑی باری باری سوالات پوچھیں اور امپوسٹر تلاش کریں!</p>
+                
+                <div class="game-info">
+                    <div class="info-box">
+                        <span class="label">کل کھلاڑی:</span>
+                        <span id="totalPlayersDisplay" class="value">0</span>
+                    </div>
+                    <div class="info-box">
+                        <span class="label">امپوسٹرز:</span>
+                        <span id="impostersDisplay" class="value">0</span>
+                    </div>
+                    <div class="info-box">
+                        <span class="label">زمرہ:</span>
+                        <span id="categoryDisplay" class="value">-</span>
+                    </div>
+                </div>
+
+                <button onclick="resetGame()" class="btn btn-danger btn-large">نیا گیم شروع کریں 🔄</button>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
